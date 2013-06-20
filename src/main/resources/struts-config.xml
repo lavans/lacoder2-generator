@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $Id: struts-config.xml 474 2011-08-21 10:48:48Z dobashi $ -->
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.0//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_0.dtd">
+
+<struts-config>
+	<global-forwards>
+		<forward name="top" path="/top.jsp" />
+		<forward name="selectTarget" path="/WEB-INF/jsp/main/selectTarget.jsp" />
+		<forward name="main" path="/main.do" />
+	</global-forwards>
+
+	<action-mappings>
+		<action path="/main" type="com.lavans.lacoder2.generator.action.MainAction">
+			<forward name="ok" path="/WEB-INF/jsp/main/main.jsp" />
+		</action>
+		<action path="/fileMake" type="com.lavans.lacoder2.generator.action.FileMakeAction">
+			<forward name="ok" path="/WEB-INF/jsp/main/filemake.jsp" />
+		</action>
+
+		<!-- ============================================= -->
+		<!-- Entity -->
+		<!-- ============================================= -->
+		<action path="/Entity" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/Entity.jsp" />
+		</action>
+		<action path="/EntityBase" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/EntityBase.jsp" />
+		</action>
+		<action path="/EntityManager" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/EntityManager.jsp" />
+		</action>
+		<action path="/EntityBak" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/EntityBak.jsp" />
+		</action>
+		<action path="/Enums" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/Enums.jsp" />
+			<forward name="ok-id" path="/WEB-INF/jsp/domain/Enums.jsp" />
+		</action>
+		<!-- 
+		<action path="/EnumsId" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/Enums-id.jsp" />
+		</action>
+		 -->
+		<action path="/EnumsDoc" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/Enums-doc.jsp" />
+		</action>
+		<action path="/Service" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/service/Service.jsp" />
+		</action>
+
+		<!-- ============================================= -->
+		<!-- sql -->
+		<!-- ============================================= -->
+<!--
+		<action path="/DaoBase" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/DaoBase.jsp" />
+		</action>
+ -->
+		<action path="/DaoBaseXml" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/DaoBaseXml.jsp" />
+		</action>
+		<action path="/Dao" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/Dao.jsp" />
+		</action>
+		<action path="/DaoXml" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/DaoXml.jsp" />
+		</action>
+		<action path="/sql" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/sql.jsp" />
+		</action>
+		<action path="/sqlCopy" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/domain/sqlCopy.jsp" />
+		</action>
+
+		<!-- ============================================= -->
+		<!-- presentation -->
+		<!-- ============================================= -->
+		<action path="/Action" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/presentation/Action.jsp" />
+		</action>
+		<action path="/jsp" type="com.lavans.lacoder2.generator.action.ModelAction">
+			<forward name="ok" path="/WEB-INF/jsp/presentation/jsp.jsp" />
+		</action>
+	</action-mappings>
+</struts-config>

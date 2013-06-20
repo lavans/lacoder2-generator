@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d{HH:mm:ss.SSS} [gen] %-5level %C{0}#%method:%line - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="com.lavans.lacoder2.generator" level="DEBUG"/>
+  <logger name="jp.co.sbisec.iris" level="DEBUG"/>
+  
+  <root level="info">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>

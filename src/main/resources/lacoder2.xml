@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE luz>
+<root>
+	<web-app>
+		<encoding>UTF-8</encoding>
+		<extension>html,json</extension>
+		<action-path>com.lavans.lacoder2.generator.action</action-path>
+		<jsp-path>/WEB-INF/jsp/</jsp-path>
+	</web-app>
+</root>
