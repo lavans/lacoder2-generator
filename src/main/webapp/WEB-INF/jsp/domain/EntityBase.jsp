@@ -43,6 +43,8 @@ package <%= pkg.getModelSubPackagePath() %>.entity.base;
 import java.util.Map;
 import java.util.HashMap;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import com.lavans.lacoder2.util.Parameterizable;
 <%= writer.writeImports() %>
 
@@ -53,6 +55,7 @@ import com.lavans.lacoder2.util.Parameterizable;
  * You shoud not change this code. You should customize <%= className %>.java.
  * @see http://www.lavans.com/soft/lacoder/
  */
+@Data
 public class <%= className %>Base implements Parameterizable, Serializable, Cloneable{
 	/** serialID */
 	private static final long serialVersionUID = 1L;
@@ -112,9 +115,7 @@ public class <%= className %>Base implements Parameterizable, Serializable, Clon
 		return super.clone();
 	}
 
-	// accessors
-<%= writer.writeAccesssor()
-%>	/**
+	/**
 	 * get primary key.
 	 * @return
 	 */
@@ -126,55 +127,12 @@ public class <%= className %>Base implements Parameterizable, Serializable, Clon
 	 * primary key class definition.
 	 * @author dobashi
 	 */
+	@Data
+	@AllArgsConstructor
 	public static class PK implements Parameterizable{
 		private static final long serialVersionUID = 1L;
 
 <%= writer.writeInstanceVarsPK() %>
-		/**
-		 * Constructor.
-		 */
-		public PK() {
-		}
-		/**
-		 * Constructor.
-		 */
-		public PK(<%= writer.writePKConstructorArgs() %>) {
-<%= writer.writePKSetter()
-%>		}
-
-		/**
-		 * override Object#hashCode().
-		 */
-		@Override
-		public int hashCode() {
-			return toString().hashCode();
-		}
-
-		/**
-		 * override Object#equals().
-		 */
-		@Override
-		public boolean equals(Object obj) {
-			// 参照先が同じならtrue
-			if(this==obj) return true;
-			// このクラス(または派生クラス)のPKでないならfalse
-			if(!(obj instanceof <%= className %>Base.PK)){
-				return false;
-			}
-			// PK型で受け取る
-			<%= className %>Base.PK o = (<%= className %>Base.PK)obj;
-			// 各PKを繋いだ文字列で比較する
-			return toString().equals(o.toString());
-		}
-
-		/**
-		 * toString.
-		 * PKの各属性を":"で連結して返す。
-		 */
-		@Override
-		public String toString() {
-			return <%= writer.writeStringMembersPK() %>;
-		}
 
 		/**
 		 * Get Map&lt;String, String[]&gt; paramegters from Attributes for HTTP
@@ -208,9 +166,6 @@ public class <%= className %>Base implements Parameterizable, Serializable, Clon
 <%= writer.writeGetAttributeMapPK() %>
 			return map;
 		}
-
-		// accessors
-<%= writer.writeAccesssorPK() %>
 	}
 }
 </pre>

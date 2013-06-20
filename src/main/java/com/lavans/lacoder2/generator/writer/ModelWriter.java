@@ -171,27 +171,27 @@ public class ModelWriter {
 	 * インスタンス変数書きだし。
 	 * @return
 	 */
-	public String writeAccesssorPK(){
-		return StringUtils.indent(writeAccesssor(entity.getPrimaryKeyList()),1);
-	}
-	public String writeAccesssor(){
-		return writeAccesssor(entity.getAttrList());
-	}
-	private String writeAccesssor(List<Attribute> list){
-		StringBuffer buf = new StringBuffer();
-		for(Attribute attr: list){
-//			if(org.apache.commons.lang.StringUtils)
-			buf.append(attr.toGetter()).append("\n");
-			buf.append(attr.toSetter()).append("\n");
-		}
-
-		// backup
-		if(entity.hasBackup()){
-			buf.append(backupAttr.toGetter()).append("\n");
-			buf.append(backupAttr.toSetter()).append("\n");
-		}
-		return buf.toString();
-	}
+//	public String writeAccesssorPK(){
+//		return StringUtils.indent(writeAccesssor(entity.getPrimaryKeyList()),1);
+//	}
+//	public String writeAccesssor(){
+//		return writeAccesssor(entity.getAttrList());
+//	}
+//	private String writeAccesssor(List<Attribute> list){
+//		StringBuffer buf = new StringBuffer();
+//		for(Attribute attr: list){
+////			if(org.apache.commons.lang.StringUtils)
+//			buf.append(attr.toGetter()).append("\n");
+//			buf.append(attr.toSetter()).append("\n");
+//		}
+//
+//		// backup
+//		if(entity.hasBackup()){
+//			buf.append(backupAttr.toGetter()).append("\n");
+//			buf.append(backupAttr.toSetter()).append("\n");
+//		}
+//		return buf.toString();
+//	}
 
 	/**
 	 * PKコンストラクタ呼び出し
@@ -204,29 +204,29 @@ public class ModelWriter {
 		}
 		return buf.substring(1);
 	}
-	/**
-	 * PKコンストラクタ引数宣言
-	 * @return
-	 */
-	public String writePKConstructorArgs(){
-		StringBuffer buf = new StringBuffer();
-		for(Attribute attr: entity.getPrimaryKeyList()){
-			buf.append(","+ attr.getJavaType()+ " "+ attr.getVarName() );
-		}
-		return buf.substring(1);
-	}
+//	/**
+//	 * PKコンストラクタ引数宣言
+//	 * @return
+//	 */
+//	public String writePKConstructorArgs(){
+//		StringBuffer buf = new StringBuffer();
+//		for(Attribute attr: entity.getPrimaryKeyList()){
+//			buf.append(","+ attr.getJavaType()+ " "+ attr.getVarName() );
+//		}
+//		return buf.substring(1);
+//	}
 	/**
 	 * PK作成用
 	 * @return
 	 */
-	public String writePKSetter(){
-		StringBuffer buf = new StringBuffer();
-		for(Attribute attr: entity.getPrimaryKeyList()){
-//			if(org.apache.commons.lang.StringUtils)
-			buf.append("this."+ attr.getVarName() +"="+ attr.getVarName() +";\n");
-		}
-		return StringUtils.indent(buf.toString(),3);
-	}
+//	public String writePKSetter(){
+//		StringBuffer buf = new StringBuffer();
+//		for(Attribute attr: entity.getPrimaryKeyList()){
+////			if(org.apache.commons.lang.StringUtils)
+//			buf.append("this."+ attr.getVarName() +"="+ attr.getVarName() +";\n");
+//		}
+//		return StringUtils.indent(buf.toString(),3);
+//	}
 
 	/**
 	 * getParameters()の各属性の書き出し
