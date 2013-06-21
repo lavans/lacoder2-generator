@@ -47,9 +47,9 @@ public class ModelWriter {
 		}
 		if(entity.hasDate()){
 			buf.append("import java.util.Date;\n");
-			buf.append("import java.text.DateFormat;\n");
-			buf.append("import java.text.ParseException;\n");
-			buf.append("import java.text.SimpleDateFormat;\n");
+//			buf.append("import java.text.DateFormat;\n");
+//			buf.append("import java.text.ParseException;\n");
+//			buf.append("import java.text.SimpleDateFormat;\n");
 		}
 		if(entity.hasList()){
 			buf.append("import com.lavans.lacoder2.lang.StringUtils;\n");
@@ -167,27 +167,17 @@ public class ModelWriter {
 	 * アクセッサの書き出し
 	 * @return
 	 */
-//	public String writeAccesssorPK(){
-//		return StringUtils.indent(writeAccesssor(entity.getPrimaryKeyList()),1);
-//	}
-//	public String writeAccesssor(){
-//		return writeAccesssor(entity.getAttrList());
-//	}
-//	private String writeAccesssor(List<Attribute> list){
-//		StringBuffer buf = new StringBuffer();
-//		for(Attribute attr: list){
-////			if(org.apache.commons.lang.StringUtils)
-//			buf.append(attr.toGetter()).append("\n");
-//			buf.append(attr.toSetter()).append("\n");
-//		}
-//
-//		// backup
-//		if(entity.hasBackup()){
-//			buf.append(backupAttr.toGetter()).append("\n");
-//			buf.append(backupAttr.toSetter()).append("\n");
-//		}
-//		return buf.toString();
-//	}
+	public String writeAccesssor(){
+		return writeAccesssor(entity.getAttrList());
+	}
+	private String writeAccesssor(List<Attribute> list){
+		StringBuffer buf = new StringBuffer();
+		for(Attribute attr: list){
+			buf.append(attr.toClassGetter());
+			buf.append(attr.toClassSetter());
+		}
+		return buf.toString();
+	}
 
 	/**
 	 * PKコンストラクタ呼び出し

@@ -45,6 +45,7 @@ import java.util.HashMap;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import com.lavans.lacoder2.util.Parameterizable;
 <%= writer.writeImports() %>
 
@@ -115,6 +116,7 @@ public class <%= className %>Base implements Parameterizable, Serializable, Clon
 		return super.clone();
 	}
 
+<%= writer.writeAccesssor() %>
 	/**
 	 * get primary key.
 	 * @return
@@ -129,6 +131,7 @@ public class <%= className %>Base implements Parameterizable, Serializable, Clon
 	 */
 	@Data
 	@AllArgsConstructor
+	@NoArgsConstructor
 	public static class PK implements Parameterizable{
 		private static final long serialVersionUID = 1L;
 

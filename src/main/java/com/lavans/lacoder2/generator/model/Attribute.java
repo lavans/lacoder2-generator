@@ -265,102 +265,122 @@ public class Attribute{
 		return result;
 	}
 
-	public String toGetter(){
+	public String toClassGetter(){
+		if(!hasClass()){ return ""; }
+		
 		StringBuffer buf = new StringBuffer();
 		buf.append("	/**\n");
-		buf.append("	 * @return "+ getTitle() +"を戻します。\n");
+		buf.append("	 * @return "+ getClassVarName() +"を戻します。\n");
 		buf.append("	 */\n");
-		buf.append("	public "+ getJavaType() +" "+ getGetterName() +"(){\n");
-		buf.append("		return "+ getVarName() +";\n");
-		buf.append("	}\n");
-
-		if(hasClass()){
-			buf.append("	/**\n");
-			buf.append("	 * @return "+ getClassVarName() +"を戻します。\n");
-			buf.append("	 */\n");
-			buf.append("	public "+ getClassLastName() +" get"+ StringUtils.capitalize(getClassVarName()) +"(){\n");
-			if(isEnum){
-				if(getJavaType().equals("boolean")){
-					buf.append("		return "+ getClassLastName() +".getInstance(Boolean.toString("+ getVarName() +"));\n");
-				}else if(getJavaType().equals("int")){
-					buf.append("		return "+ getClassLastName() +".getInstanceByInt("+ getVarName() +");\n");
-				}else{
-					buf.append("		return "+ getClassLastName() +".getInstance("+ getVarName() +");\n");
-				}
+		buf.append("	public "+ getClassLastName() +" get"+ StringUtils.capitalize(getClassVarName()) +"(){\n");
+		if(isEnum){
+			if(getJavaType().equals("boolean")){
+				buf.append("		return "+ getClassLastName() +".getInstance(Boolean.toString("+ getVarName() +"));\n");
+			}else if(getJavaType().equals("int")){
+				buf.append("		return "+ getClassLastName() +".getInstanceByInt("+ getVarName() +");\n");
 			}else{
-				buf.append("		return "+ getClassVarName() +";\n");
+				buf.append("		return "+ getClassLastName() +".getInstance("+ getVarName() +");\n");
 			}
-			buf.append("	}\n");
-			if(isEnum){
-				buf.append("	/**\n");
-				buf.append("	 * @return "+ getClassVarName() +"Titleを戻します。\n");
-				buf.append("	 */\n");
-				buf.append("	public String get"+ StringUtils.capitalize(getClassVarName()) +"Title(){\n");
-				buf.append("		if(get"+ StringUtils.capitalize(getClassVarName()) +"()==null) return \"\";\n");
-				buf.append("		return get"+ StringUtils.capitalize(getClassVarName()) +"().getTitle();\n");
-				buf.append("	}\n");
-			}
-			// enumの時はtitleも返す
-		}else if(getJavaType().equals("Date")){
-			buf.append("	/**\n");
-			buf.append("	 * @return "+ getTitle() +"の日付フォーマットを戻します。\n");
-			buf.append("	 */\n");
-			buf.append("	public DateFormat "+ getGetterName() +"DateFormat(){\n");
-			buf.append("		return new SimpleDateFormat(\""+ getDateFormat() +"\");\n");
-			buf.append("	}\n");
-			buf.append("	/**\n");
-			buf.append("	 * @return "+ getTitle() +"の日付文字列を戻します。\n");
-			buf.append("	 */\n");
-			buf.append("	public String "+ getGetterName() +"Str(){\n");
-			buf.append("		if("+ getVarName() +"==null) return \"\";\n");
-			buf.append("		return "+ getGetterName() + "DateFormat().format("+ getVarName() +");\n");
-			buf.append("	}\n");
+		}else{
+			buf.append("		return "+ getClassVarName() +";\n");
 		}
+		buf.append("	}\n");
+		buf.append("	\n");
+		// enumの時はtitleも返す
+		if(isEnum){
+			buf.append("	/**\n");
+			buf.append("	 * @return "+ getClassVarName() +"Titleを戻します。\n");
+			buf.append("	 */\n");
+			buf.append("	public String get"+ StringUtils.capitalize(getClassVarName()) +"Title(){\n");
+			buf.append("		if(get"+ StringUtils.capitalize(getClassVarName()) +"()==null) return \"\";\n");
+			buf.append("		return get"+ StringUtils.capitalize(getClassVarName()) +"().getTitle();\n");
+			buf.append("	}\n");
+			buf.append("	\n");
+		}
+		return buf.toString();
+	}
+	
+	public String toClassSetter(){
+		if(!hasClass()){ return ""; }
+		
+		StringBuffer buf = new StringBuffer();
+		buf.append("	/**\n");
+		buf.append("	 * "+ getClassLastName() +"を設定します。\n");
+		buf.append("	 */\n");
+		buf.append("	public void set"+ StringUtils.capitalize(getClassVarName()) +"("+ getClassLastName() +" "+ getClassVarName() +"){\n");
+		if(isEnum){
+			if(getJavaType().equals("boolean")){
+				buf.append("		this."+ getVarName() +"=Boolean.parseBoolean("+ getClassVarName() +".getId());\n");
+			}else if(getJavaType().equals("int")){
+				buf.append("		this."+ getVarName() +"="+ getClassVarName() +".getInt();\n");
+			}else{
+				buf.append("		this."+ getVarName() +"="+ getClassVarName() +".getId();\n");
+			}
+		}else{
+			buf.append("		this."+ getClassVarName() +"="+ getClassVarName() +";\n");
+		}
+		buf.append("	}\n");
+		buf.append("	\n");
 
 		return buf.toString();
 	}
 
 	/**
-	 * setterの生成
+	 * 
 	 * @return
 	 */
-	public String toSetter(){
-		StringBuffer buf = new StringBuffer();
-		buf.append("	/**\n");
-		buf.append("	 *  "+ getTitle() +"を設定します。\n");
-		buf.append("	 */\n");
-		buf.append("	public void "+ getSetterName() +"("+ getJavaType() +" "+ getVarName() +"){\n");
-		buf.append("		this."+ getVarName() +"="+ getVarName() +";\n");
-		buf.append("	}\n");
-
-		if(hasClass()){
-			buf.append("	/**\n");
-			buf.append("	 * "+ getClassLastName() +"を設定します。\n");
-			buf.append("	 */\n");
-			buf.append("	public void set"+ StringUtils.capitalize(getClassVarName()) +"("+ getClassLastName() +" "+ getClassVarName() +"){\n");
-			if(isEnum){
-				if(getJavaType().equals("boolean")){
-					buf.append("		this."+ getVarName() +"=Boolean.parseBoolean("+ getClassVarName() +".getId());\n");
-				}else if(getJavaType().equals("int")){
-					buf.append("		this."+ getVarName() +"="+ getClassVarName() +".getInt();\n");
-				}else{
-					buf.append("		this."+ getVarName() +"="+ getClassVarName() +".getId();\n");
-				}
-			}else{
-				buf.append("		this."+ getClassVarName() +"="+ getClassVarName() +";\n");
-			}
-			buf.append("	}\n");
-		}else if(getJavaType().equals("Date")){
-			buf.append("	/**\n");
-			buf.append("	 * "+ getTitle() +"を日付文字列で設定します。\n");
-			buf.append("	 */\n");
-			buf.append("	public void "+ getSetterName() +"Str(String "+ getVarName() +"Str) throws ParseException{\n");
-			buf.append("		this."+ getVarName() +"="+ getGetterName() + "DateFormat().parse("+ getVarName() +"Str);\n");
-			buf.append("	}\n");
-		}
-
-		return buf.toString();
-	}
+//	public String toGetter(){
+//		StringBuffer buf = new StringBuffer();
+//		buf.append("	/**\n");
+//		buf.append("	 * @return "+ getTitle() +"を戻します。\n");
+//		buf.append("	 */\n");
+//		buf.append("	public "+ getJavaType() +" "+ getGetterName() +"(){\n");
+//		buf.append("		return "+ getVarName() +";\n");
+//		buf.append("	}\n");
+//
+//		if(getJavaType().equals("Date")){
+//			buf.append("	/**\n");
+//			buf.append("	 * @return "+ getTitle() +"の日付フォーマットを戻します。\n");
+//			buf.append("	 */\n");
+//			buf.append("	public DateFormat "+ getGetterName() +"DateFormat(){\n");
+//			buf.append("		return new SimpleDateFormat(\""+ getDateFormat() +"\");\n");
+//			buf.append("	}\n");
+//			buf.append("	/**\n");
+//			buf.append("	 * @return "+ getTitle() +"の日付文字列を戻します。\n");
+//			buf.append("	 */\n");
+//			buf.append("	public String "+ getGetterName() +"Str(){\n");
+//			buf.append("		if("+ getVarName() +"==null) return \"\";\n");
+//			buf.append("		return "+ getGetterName() + "DateFormat().format("+ getVarName() +");\n");
+//			buf.append("	}\n");
+//		}
+//
+//		return buf.toString();
+//	}
+//
+//	/**
+//	 * setterの生成
+//	 * @return
+//	 */
+//	public String toSetter(){
+//		StringBuffer buf = new StringBuffer();
+//		buf.append("	/**\n");
+//		buf.append("	 *  "+ getTitle() +"を設定します。\n");
+//		buf.append("	 */\n");
+//		buf.append("	public void "+ getSetterName() +"("+ getJavaType() +" "+ getVarName() +"){\n");
+//		buf.append("		this."+ getVarName() +"="+ getVarName() +";\n");
+//		buf.append("	}\n");
+//
+//		if(getJavaType().equals("Date")){
+//			buf.append("	/**\n");
+//			buf.append("	 * "+ getTitle() +"を日付文字列で設定します。\n");
+//			buf.append("	 */\n");
+//			buf.append("	public void "+ getSetterName() +"Str(String "+ getVarName() +"Str) throws ParseException{\n");
+//			buf.append("		this."+ getVarName() +"="+ getGetterName() + "DateFormat().parse("+ getVarName() +"Str);\n");
+//			buf.append("	}\n");
+//		}
+//
+//		return buf.toString();
+//	}
 
 	/**
 	 *  insert_date/user等は入力不可。
