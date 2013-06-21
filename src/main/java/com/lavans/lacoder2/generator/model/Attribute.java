@@ -162,13 +162,13 @@ public class Attribute{
 //			}
 //		}else
 		if(isList){
-			result = getVarName();
+			result = name;
 			//return ""; // とりあえずリストはOutputパラメータだけなので無視
 		}else if(getJavaType().equals("String")){
-			result = getVarName();
+			result = name;
 		}else if(getJavaType().equals("Date")){
 			// date型は値が入っていない場合NullPo抑制が必要
-			result = name + "==null?\"\":"+ getGetterName() +"Str()";
+			result = name + "==null?\"\":"+ "String.valueOf("+ name +".getTime())";
 		}else if(getJavaType().equals("byte[]")){
 			// Base64で埋められるけど、バイナリデータをformに入れて持ち回りたいことはないのでなにもしない。
 			// でも後で入れるかもしれないからコメントで残しておく
@@ -206,7 +206,7 @@ public class Attribute{
 		}else if(getJavaType().equals("boolean") || getJavaType().equals("Boolean")){
 			buf.append("Boolean.parseBoolean(map.get(prefix+"+ getConstName() +")[0]);");
 		}else if(getJavaType().equals("Date")){
-			buf.append(getGetterName() +"DateFormat().parse(map.get(prefix+"+ getConstName() +")[0]);");
+			buf.append("new Date(Long.parseLong(map.get(prefix+"+ getConstName() +")[0]));");
 		}else if(getJavaType().equals("BigDecimal")){
 			buf.append("new BigDecimal(map.get(prefix+"+ getConstName() +")[0]);");
 		}else if(getJavaType().equals("byte[]")){

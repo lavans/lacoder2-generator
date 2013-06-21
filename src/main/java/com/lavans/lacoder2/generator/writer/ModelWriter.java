@@ -167,10 +167,6 @@ public class ModelWriter {
 	 * アクセッサの書き出し
 	 * @return
 	 */
-	/**
-	 * インスタンス変数書きだし。
-	 * @return
-	 */
 //	public String writeAccesssorPK(){
 //		return StringUtils.indent(writeAccesssor(entity.getPrimaryKeyList()),1);
 //	}

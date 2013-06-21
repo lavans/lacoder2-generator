@@ -45,6 +45,8 @@ import java.io.Serializable;
 import <%= pkg.getModelSubPackagePath() %>.entity.base.<%= className %>Base;
 import java.util.Map;
 import java.util.HashMap;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 <%--
 import <%= pkg.getName() %>.<%= pkg.getProject() %>.http.IUser;
 import <%= pkg.getName() %>.<%= pkg.getProject() %>.http.Cp932;
@@ -55,6 +57,8 @@ import <%= pkg.getName() %>.<%= pkg.getProject() %>.common.UserManager;
  *
  * @author ${user}
  */
+@Data
+@EqualsAndHashCode(callSuper=false)
 public class <%= className %> extends <%= className %>Base{
 	/** serialID */
 	private static final long serialVersionUID = 1L;
