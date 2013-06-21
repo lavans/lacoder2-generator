@@ -7,12 +7,6 @@
 <%@ page import="com.lavans.lacoder2.generator.model.*" %>
 <%@ page import="com.lavans.lacoder2.generator.model.Attribute" %>
 <%!
-	/**
-	 * 基本方針
-	 * とりあえずプロバイス用に手っ取り早く。
-	 * 最終的にはjspをやめてファイルに直接書き出す。
-	 * これをベースクラスとしてインクリメンタルな開発に耐えられるように。
-	 */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 %>
 <%
