@@ -2,5 +2,5 @@
 <!DOCTYPE lacoder>
 <!-- $Id: target.xml.sample 248 2011-02-01 14:10:31Z dobashi $ -->
 <lacoder2-generator>
-	<target name="ds-domain" bl="ds-service" />
+	<target name="ds-service" bl="ds-bl" />
 </lacoder2-generator>

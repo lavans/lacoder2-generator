@@ -72,7 +72,7 @@ public class <%= className %>Action extends ActionSupport{
 --%>	/** logger */
 	private static Log logger = LogFactory.getLog(<%= className %>Action.class);
 	/** <%= entity.getTitle() %>Service */
-	private <%= className %>Service <%= varName %>Service = BeanManager.getBean(<%= className %>Service.class);
+	private <%= className %>Service <%= varName %>Service = ServiceManager.getService(<%= className %>Service.class);
 
 <%--
 	/**
