@@ -267,7 +267,7 @@ public class Attribute{
 
 	public String toClassGetter(){
 		if(!hasClass()){ return ""; }
-		
+
 		StringBuffer buf = new StringBuffer();
 		buf.append("	/**\n");
 		buf.append("	 * @return "+ getClassVarName() +"を戻します。\n");
@@ -299,10 +299,10 @@ public class Attribute{
 		}
 		return buf.toString();
 	}
-	
+
 	public String toClassSetter(){
 		if(!hasClass()){ return ""; }
-		
+
 		StringBuffer buf = new StringBuffer();
 		buf.append("	/**\n");
 		buf.append("	 * "+ getClassLastName() +"を設定します。\n");
@@ -326,7 +326,7 @@ public class Attribute{
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 //	public String toGetter(){
@@ -463,11 +463,11 @@ public class Attribute{
 	}
 
 	/**
-	 * Const定義名を取得します。DBカラム名と同じです。
+	 * Const定義名を取得します。スネークケースで全大文字です。。
 	 * @return dbName
 	 */
 	public String getConstName() {
-		return dbName;
+		return StringUtils.toSnakeCase(name).toUpperCase();
 	}
 	/**
 	 * Entity内での変数名を返す。

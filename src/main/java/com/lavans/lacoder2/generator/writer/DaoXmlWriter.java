@@ -53,11 +53,11 @@ public class DaoXmlWriter {
 		StringBuilder allUpdateBuf = new StringBuilder();
 		for(Attribute attr: entity.getAttrList()){
 			if(attr.isPrimaryKey()){
-				whereBuf.append(" AND "+ attr.getConstName() +"=:"+ attr.getName());
-				pkBuf.append(", ")/*.append(tableName).append(".")*/.append(attr.getConstName());
+				whereBuf.append(" AND "+ attr.getDbName() +"=:"+ attr.getName());
+				pkBuf.append(", ")/*.append(tableName).append(".")*/.append(attr.getDbName());
 			}
-			allSelectBuf.append(", ")/*.append(tableName).append(".")*/.append(attr.getConstName());
-			allInsertCBuf.append(", "+attr.getConstName());
+			allSelectBuf.append(", ")/*.append(tableName).append(".")*/.append(attr.getDbName());
+			allInsertCBuf.append(", "+attr.getDbName());
 			allInsertVBuf.append(attr.getInsertSql());
 			allUpdateBuf.append(attr.getUpdateSql());
 		}
@@ -68,7 +68,7 @@ public class DaoXmlWriter {
 		allInsertValues  = allInsertVBuf.substring(2);
 		allUpdateColumns = allUpdateBuf.substring(2);
 	}
-	
+
 	/**
 	 * テーブル名作成。スキーマが指定されている場合は"スキーマ.テーブル"となる
 	 * @param entity
@@ -79,7 +79,7 @@ public class DaoXmlWriter {
 		if(!StringUtils.isEmpty(entity.getSchema())){
 			result = entity.getSchema()+"."+result;
 		}
-		return result.toUpperCase();
+		return result;
 	}
 
 	public String writeSelectSql(){

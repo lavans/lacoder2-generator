@@ -53,7 +53,7 @@ public class Entity {
 
 	// 編集するユーザーの一覧
 	private List<String> userList = new ArrayList<String>();
-	
+
 	/**
 	 * BigDecimalを持っているかどうか
 	 * @return
@@ -132,7 +132,7 @@ public class Entity {
 		return name;
 	}
 	public String getTableName() {
-		return StringUtils.toUnderscore(name).toUpperCase();
+		return StringUtils.toUnderscore(name);
 	}
 	public String getClassName() {
 		return StringUtils.capitalize(name);
@@ -363,7 +363,7 @@ public class Entity {
 	public void setHasBackup(boolean hasBackup) {
 		this.hasBackup = hasBackup;
 	}
-	
+
 	public String getSchema() {
 		return Schema;
 	}

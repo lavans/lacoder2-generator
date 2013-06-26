@@ -48,7 +48,7 @@ enum ConfigAttribute {
 	public String getXmlName() {
 		return name().toLowerCase().replace("_", "-");
 	}
-	
+
 }
 
 /**
@@ -61,7 +61,7 @@ public class XMLReader {
 
 	/**
 	 * 設定ファイル読み込み
-	 * 
+	 *
 	 * @param filename
 	 * @throws FileNotFoundException
 	 */
@@ -98,7 +98,7 @@ public class XMLReader {
 
 	/**
 	 * パッケージの読み出し
-	 * 
+	 *
 	 * @param domain
 	 * @param project
 	 * @param pkgEle
@@ -135,7 +135,7 @@ public class XMLReader {
 
 	/**
 	 * エンティティの読み出し
-	 * 
+	 *
 	 * @param entityEle
 	 * @return
 	 */
@@ -244,12 +244,12 @@ public class XMLReader {
 			if (!ele.getAttribute("type").equals("")) {
 				attr.setJavaType(ele.getAttribute("type"));
 			}
-			
+
 			// 定数名
 			if (!ele.getAttribute(ConfigAttribute.DB_NAME.getXmlName()).equals("")) {
 				attr.setDbName(ele.getAttribute(ConfigAttribute.DB_NAME.getXmlName()));
 			}else{
-				attr.setDbName(StringUtils.toUnderscore(attr.getName()).toUpperCase());
+				attr.setDbName(StringUtils.toUnderscore(attr.getName()));
 			}
 
 			// 参照クラス(optional)
@@ -370,7 +370,7 @@ public class XMLReader {
 
 		return enumClass;
 	}
-	
+
 	private EnumMember readEnumMember(EnumClass enumClass, Element ele){
 		EnumMember member = new EnumMember();
 		member.setName(ele.getAttribute("name"));
@@ -402,7 +402,7 @@ public class XMLReader {
 		if (ele.getAttribute("exclude") != "") {
 			member.setExclude("all");
 		}
-		
+
 		return member;
 	}
 
