@@ -49,7 +49,7 @@ CREATE TABLE <%= tableName %> (
 	logger.info("CREATE TABLE");
 	for(int i=0; i<entity.size(); i++){
 		Attribute attr = entity.get(i);
-%>	<%= attr.getConstName().toUpperCase() +"	"+ attr.getDbType().toUpperCase() %>,	-- <%= attr.getTitle() %>
+%>	<%= attr.getDbName() +"	"+ attr.getDbType().toUpperCase() %>,	-- <%= attr.getTitle() %>
 <%	}
 %>	CONSTRAINT <%= tableName %>_PKEY PRIMARY KEY(
 		<%= StringUtils.toUnderscore(entity.getPrimaryKey()).toUpperCase() %>
