@@ -129,7 +129,7 @@ public class Attribute{
 			// insert_dateは更新できない
 			result = "";
 		}else{
-			result = ", "+ getConstName()+"=:"+name;
+			result = ", "+ getDbName()+"=:"+name;
 		}
 		return result;
 	}
