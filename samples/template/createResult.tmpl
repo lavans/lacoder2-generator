@@ -1,0 +1,36 @@
+<!doctype html>
+<%-- $Id: $ --%>
+<%@page contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="lt" tagdir="/WEB-INF/tags"%>
+
+<html>
+<head>
+<%@include file="../../common/jsp/include/head.jsp" %>
+<title><#entity title>登録完了</title>
+</head>
+<body>
+
+<% request.setAttribute("title", "<#entity title>登録完了"); %>
+<%@include file="../../common/jsp/include/header.jsp" %>
+
+<hr>
+下記の内容で登録しました。
+<table class="search">
+<#foreach attr attributeList>
+  <tr>
+    <th><#attr title></th>
+    <td>
+      <s:property value="%{<#entity name>.<#attr name>}"/><br>
+    </td>
+  </tr>
+</#foreach>
+</table>
+
+<!-- end of contents -->
+
+<!-- footer -->
+<%@include file="../../common/jsp/include/footer.jsp" %>
+</body>
+</html>

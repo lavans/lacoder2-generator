@@ -1,0 +1,58 @@
+<!doctype html>
+<%-- $Id: $ --%>
+<%@page contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="lt" tagdir="/WEB-INF/tags"%>
+
+<html>
+<head>
+<jsp:include page="../include/head.jsp">
+	<jsp:param value="title" name="<#entity title>詳細"/>
+</jsp:include>
+</head>
+<body>
+<div id="wrapper">
+
+<%-- Menu --%>
+<jsp:include page="../include/menu.jsp">
+	<jsp:param value="current" name="Home"/>
+</jsp:include>
+
+<%-- Main --%>
+<div id="containor" >
+
+<%-- Header --%>
+<jsp:include page="../include/header.jsp">
+	<jsp:param value="title" name="<#entity title>詳細"/>
+</jsp:include>
+
+<%-- Main Contens --%>
+<div id="contents" >
+<div class="wrap">
+
+<h3><#entity title>詳細</h3>
+
+<table class="search">
+<#foreach attr attributeList>
+  <tr>
+    <th><#attr title></th>
+    <td>
+      ${fn:escapeXml(<#entity name>.<#attr name>)}
+    </td>
+  </tr>
+</#foreach>
+</table>
+
+</div>
+</div>
+<!-- end of contents -->
+
+</div>
+
+<!-- footer -->
+<%@include file="../include/footer.jsp" %>
+
+</div>
+</body>
+</html>

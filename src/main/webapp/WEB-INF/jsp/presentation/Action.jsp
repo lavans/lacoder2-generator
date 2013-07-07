@@ -49,6 +49,8 @@ if(!StringUtils.isEmpty(jspPath)){ jspPath = jspPath+="/"; }
 package <%= pkg.getActionPath(role.getName()) %>;
 <%--import java.util.List; --%>
 import java.util.Map;
+import lombok.val;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.lavans.lacoder2.di.BeanManager;
@@ -66,11 +68,11 @@ import <%= pkg.getModelSubPackagePath() %>.entity.<%= className %>;
  *
  * @author ${user}
  */
-
+@Slf4j
 public class <%= className %>Action extends ActionSupport{
 <%--	private static final long serialVersionUID = 1L;
---%>	/** logger */
-	private static Log logger = LogFactory.getLog(<%= className %>Action.class);
+--%>	/** log */
+	private static Log log = LogFactory.getLog(<%= className %>Action.class);
 	/** <%= entity.getTitle() %>Service */
 	private <%= className %>Service <%= varName %>Service = ServiceManager.getService(<%= className %>Service.class);
 
@@ -90,9 +92,9 @@ public class <%= className %>Action extends ActionSupport{
 	 * @throws Exception
 	 */
 	public String read() throws Exception{
-		<%= className %>.PK pk = parsePk();
+		val pk = parsePk();
 		// コピーを取得
-		<%= className %> <%= varName %> = <%= varName %>Service.read(pk);
+		val <%= varName %> = <%= varName %>Service.read(pk);
 		// リクエストにセット
 		setAttribute("<%= varName %>", <%= varName %>);
 
@@ -107,12 +109,12 @@ public class <%= className %>Action extends ActionSupport{
 <%-- @SuppressWarnings("unchecked")
 --%>	public String list() throws Exception{
 		// PageInfo
-		PageInfo pageInfo = new PageInfo();
+		val pageInfo = new PageInfo();
 		pageInfo.setParameters(getRequest().getParameterMap(), "pageInfo.");
 
 		// Search data
-		Condition cond = DaoUtils.getCondition(getRequest().getParameterMap(), "cond.");
-		Pager&lt;<%= className %>&gt; pager = <%= varName %>Service.pager(cond, pageInfo);
+		val cond = DaoUtils.getCondition(getRequest().getParameterMap(), "cond.");
+		val pager = <%= varName %>Service.pager(cond, pageInfo);
 
 		// set to request scope
 		setAttribute("cond", cond);
@@ -127,7 +129,7 @@ public class <%= className %>Action extends ActionSupport{
 	 * @return
 	 */
 	public String createInput(){
-		<%= className %> <%= varName %> = new <%= className %>();
+		val <%= varName %> = new <%= className %>();
 		setAttribute("<%= varName %>", <%= varName %>);
 		return "<%= jspPath %><%= className %>-createInput.jsp";
 	}
@@ -137,8 +139,8 @@ public class <%= className %>Action extends ActionSupport{
 	 * @return
 	 */
 	public String createResult() throws Exception{
-		<%= className %> <%= varName %> = parseEntity();
-		Map&lt;String, String&gt; errors = <%= varName %>.validate();
+		val <%= varName %> = parseEntity();
+		val errors = <%= varName %>.validate();
 		if(errors.size()&gt;0){
 			addActionErrors(errors.values());
 			setAttribute("<%= varName %>", <%= varName %>);
@@ -149,19 +151,17 @@ public class <%= className %>Action extends ActionSupport{
 		try {
 			<%= varName %>Service.create(<%= varName %>);
 		} catch (Exception e) {
-			logger.debug("", e);
+			log.debug("", e);
 			addActionError(e.getClass().getSimpleName() +":"+ e.getMessage());
 			setAttribute("<%= varName %>", <%= varName %>);
 			return "<%= jspPath %><%= className %>-createInput.jsp";
 		}
 
-		// 登録成功
 <%	if(entity.isSkipResult()){ %>
-		// 一覧アクションへ
-		redirect("<%= className %>!list");
-		return null;
+		// 登録成功したら一覧アクションへ
+		return redirect("<%= className %>-list.html");
 <%	}else{ %>
-		// 完了画面
+		// 登録成功したら完了画面
 		return "<%= jspPath %><%= className %>-createResult.jsp";
 <%	} %>
 	}
@@ -171,9 +171,9 @@ public class <%= className %>Action extends ActionSupport{
 	 * @return
 	 */
 	public String updateInput() throws Exception{
-		<%= className %>.PK pk = parsePk();
+		val pk = parsePk();
 		// コピーを取得
-		<%= className %> <%= varName %> = <%= varName %>Service.read(pk);
+		val <%= varName %> = <%= varName %>Service.read(pk);
 		// リクエストにセット
 		setAttribute("<%= varName %>", <%= varName %>);
 
@@ -185,11 +185,11 @@ public class <%= className %>Action extends ActionSupport{
 	 * @return
 	 */
 	public String updateResult() throws Exception{
-		<%= className %>.PK pk = parsePk();
-		<%= className %> <%= varName %> = <%= varName %>Service.read(pk);
+		val pk = parsePk();
+		val <%= varName %> = <%= varName %>Service.read(pk);
 		// 入力したパラメータをセット
 		parseEntity(<%= varName %>);
-		Map&lt;String, String&gt; errors = <%= varName %>.validate();
+		val errors = <%= varName %>.validate();
 		if(errors.size()&gt;0){
 			addActionErrors(errors.values());
 			setAttribute("<%= varName %>", <%= varName %>);
@@ -201,17 +201,20 @@ public class <%= className %>Action extends ActionSupport{
 		try {
 			<%= varName %>Service.update(<%= varName %>);
 		} catch (Exception e) {
-			logger.debug("", e);
+			log.debug("", e);
 			addActionError(e.getMessage());
 			setAttribute("<%= varName %>", <%= varName %>);
 
 			return "<%= jspPath %><%= className %>-updateInput.jsp";
 		}
 
-		// 登録成功
-		// 一覧アクションへ
-		chain("<%= className %>!list");
-		return null;
+<%	if(entity.isSkipResult()){ %>
+		// 登録成功したら一覧アクションへ
+		return redirect("<%= className %>-list.html");
+<%	}else{ %>
+		// 登録成功したら完了画面
+		return "<%= jspPath %><%= className %>-updateResult.jsp";
+<%	} %>
 	}
 
 	/**
@@ -222,8 +225,7 @@ public class <%= className %>Action extends ActionSupport{
 		<%= className %>.PK pk = parsePk();
 
 		<%= varName %>Service.delete(pk);
-		redirect("<%= className %>!list");
-		return null;
+		return redirect("<%= className %>-list");
 	}
 
 	/**
