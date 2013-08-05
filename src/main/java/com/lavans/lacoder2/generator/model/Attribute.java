@@ -310,11 +310,11 @@ public class Attribute{
 		buf.append("	public void set"+ StringUtils.capitalize(getClassVarName()) +"("+ getClassLastName() +" "+ getClassVarName() +"){\n");
 		if(isEnum){
 			if(getJavaType().equals("boolean")){
-				buf.append("		this."+ getVarName() +"=Boolean.parseBoolean("+ getClassVarName() +".getId());\n");
+				buf.append("		this."+ getVarName() +"=Boolean.parseBoolean("+ getClassVarName() +".name());\n");
 			}else if(getJavaType().equals("int")){
 				buf.append("		this."+ getVarName() +"="+ getClassVarName() +".getInt();\n");
 			}else{
-				buf.append("		this."+ getVarName() +"="+ getClassVarName() +".getId();\n");
+				buf.append("		this."+ getVarName() +"="+ getClassVarName() +".name();\n");
 			}
 		}else{
 			buf.append("		this."+ getClassVarName() +"="+ getClassVarName() +";\n");
