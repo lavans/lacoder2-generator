@@ -275,11 +275,11 @@ public class Attribute{
 		buf.append("	public "+ getClassLastName() +" get"+ StringUtils.capitalize(getClassVarName()) +"(){\n");
 		if(isEnum){
 			if(getJavaType().equals("boolean")){
-				buf.append("		return "+ getClassLastName() +".getInstance(Boolean.toString("+ getVarName() +"));\n");
+				buf.append("		return "+ getClassLastName() +".valueOf"+ StringUtils.capitalize(getVarName()) +"(Boolean.toString("+ getVarName() +"));\n");
 			}else if(getJavaType().equals("int")){
-				buf.append("		return "+ getClassLastName() +".getInstanceByInt("+ getVarName() +");\n");
+				buf.append("		return "+ getClassLastName() +".valueOfInt("+ getVarName() +");\n");
 			}else{
-				buf.append("		return "+ getClassLastName() +".getInstance("+ getVarName() +");\n");
+				buf.append("		return "+ getClassLastName() +".valueOf("+ getVarName() +");\n");
 			}
 		}else{
 			buf.append("		return "+ getClassVarName() +";\n");

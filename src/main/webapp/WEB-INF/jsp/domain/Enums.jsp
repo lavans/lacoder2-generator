@@ -42,14 +42,14 @@ import java.util.Map;
 <%--import com.lavans.lacoder2.util.IEnum; --%>
 /**
  * <%= enumClass.getTitle() %>Enum。
- * @author 
+ * @author
  */
 public enum <%= className %> {
 <%= writer.writeMembers() %>
 
 	/** Enum ID */
 	public static final String _ID	= "<%= enumClass.getName() %>";
-	
+
 <%= writer.writeMaps() %>
 
 	/**
@@ -60,7 +60,7 @@ public enum <%= className %> {
 	static{
 <%= writer.writeStatics() %>
 	}
-	
+
 	/**
 	 * IDから表示名を取得。
 	 * @param id
@@ -85,7 +85,7 @@ public enum <%= className %> {
 	 * @param id
 	 * @return
 	 */
-	public static <%= className %> valueOf<%= StringUtils.capitalize(fieldName) %>(int id){
+	public static <%= className %> valueOfInt(int id){
 		return (<%= className %>)<%= fieldName %>Map.get(new Integer(id));
 	}
 <%		}else{
@@ -112,7 +112,7 @@ public enum <%= className %> {
 %>		return <%= enumClass.getDefaultMember().getConstName() %>;
 <%	}else{
 %>		return null;
-<%	}	
+<%	}
 %>	}
 	/**
 	 * デフォルトのnameを返す。
@@ -125,7 +125,7 @@ public enum <%= className %> {
 %>		return <%= enumClass.getDefaultMember().getConstName() %>.name();
 <%	}else{
 %>		return "";
-<%	}	
+<%	}
 %>	}
 
 <%	for(int i=0; i<fieldList.size(); i++){
