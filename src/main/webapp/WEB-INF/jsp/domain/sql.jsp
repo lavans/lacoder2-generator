@@ -81,7 +81,7 @@ CREATE TABLE <%= tableName %>_BAK (
 	//logger.info("INSERT");
 	String officeName = entity.getName()+df.format(j);
 	if(attrId.isSequence()){
-		out.print(typeMan.getNextval(attrId));
+		out.print("("+ typeMan.getNextval(attrId) +")");
 	}else if(attrId.getJavaType().equals("int")){
 //		out.print("1");
 		out.print(""+j);
