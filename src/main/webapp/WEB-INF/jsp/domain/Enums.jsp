@@ -71,7 +71,7 @@ public enum <%= className %> {
 	}
 	public static String getTitle(String name, String defaultStr){
 		if(valueOf(name)!=null){
-			valueOf(name).getTitle();
+			return valueOf(name).getTitle();
 		}
 		return defaultStr;
 	}
