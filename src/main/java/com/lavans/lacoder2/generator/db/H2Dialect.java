@@ -96,6 +96,15 @@ public class H2Dialect extends TypeManager {
 	public String getNextval(Attribute attr) {
 		return "SELECT "+ attr.getEntity().getTableName() +"_PK_SEQ.NEXTVAL";
 	}
+
+	/**
+	 * sequence update
+	 */
+	public String getSequenceUpdateSql(Attribute attr){
+		// TODO
+		return "";
+	}
+
 	/**
 	 * backuptable
 	 * @param attr

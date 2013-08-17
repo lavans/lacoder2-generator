@@ -9,12 +9,6 @@
 <%@ page import="com.lavans.lacoder2.generator.model.Attribute" %>
 <%@ page import="com.lavans.lacoder2.generator.db.*" %>
 <%
-	/**
-	 * 基本方針
-	 * とりあえずプロバイス用に手っ取り早く。
-	 * 最終的にはjspをやめてファイルに直接書き出す。
-	 * これをベースクラスとしてインクリメンタルな開発に耐えられるように。
-	 */
 	Entity entity = (Entity)request.getAttribute("lacoder.entity");
 	Attribute attrId = entity.get(0);
 	TypeManager typeMan = entity.getTypeManager();
@@ -22,7 +16,7 @@
 	StringBuffer buf = new StringBuffer();
 
 	for(int i=0; i<entity.size(); i++){
-		String str = StringUtils.toUnderscore(entity.get(i).getName()).toUpperCase();
+		String str = StringUtils.toSnakeCase(entity.get(i).getName());
 		if(!str.equals("")){
 			buf.append(", "+str);
 		}
@@ -70,6 +64,10 @@ INSERT INTO  <%= tableName %> (
 );
 
 DROP TABLE <%= tableName %>2;
+
+<% if(attrId.isSequence()){ %>
+<%= typeMan.getSequenceUpdateSql(attrId) %>
+<% } %>
 
 </pre>
 <!--

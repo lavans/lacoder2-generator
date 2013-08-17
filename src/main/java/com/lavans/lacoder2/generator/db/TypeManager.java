@@ -58,6 +58,12 @@ public abstract class TypeManager {
 	 */
 	public abstract String getNextval(Attribute attr);
 	public abstract String getNextvalBak(Attribute attr);
+	/**
+	 * シーケンスを最後の値に更新
+	 * @param attr
+	 * @return
+	 */
+	public abstract String getSequenceUpdateSql(Attribute attr);
 
 	/**
 	 * シーケンスの型を取得。バックアップテーブル用。

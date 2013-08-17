@@ -94,6 +94,15 @@ public class OracleDialect extends TypeManager {
 	}
 
 	/**
+	 * sequence update
+	 */
+	public String getSequenceUpdateSql(Attribute attr){
+		// TODO
+		return "";
+	}
+
+
+	/**
 	 * シーケンスの型を取得。バックアップテーブル用。
 	 * @return
 	 */

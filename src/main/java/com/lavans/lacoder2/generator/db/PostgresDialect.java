@@ -93,7 +93,7 @@ public class PostgresDialect extends TypeManager {
 	 * @see com.lavans.lacoder2.generator.main.TypeManager#getNextval(com.lavans.lacoder2.generator.main.Entity, com.lavans.lacoder2.generator.main.Attribute)
 	 */
 	public String getNextval(Attribute attr) {
-		return "SELECT NEXTVAL('"+ attr.getEntity().getTableName() +"_"+ attr.getConstName() +"_SEQ')";
+		return "SELECT NEXTVAL('"+ getSequenceId(attr) +"')";
 	}
 
 	/**
@@ -102,9 +102,17 @@ public class PostgresDialect extends TypeManager {
 	 * @return
 	 */
 	public String getNextvalBak(Attribute attr) {
-		return ("SELECT NEXTVAL('"+ attr.getEntity().getTableName() +"_BAK_BACKUP_ID_SEQ')");
+		return "SELECT NEXTVAL('"+ attr.getEntity().getTableName() +"_BAK_BACKUP_ID_SEQ')";
 	}
 
+	public String getSequenceUpdateSql(Attribute attr){
+		return "SELECT SETVAL('"+ getSequenceId(attr) +"', (SELECT MAX("+ attr.getDbName() +") from "+ attr.getEntity().getTableName() +"), true)";
+	}
+
+
+	private String getSequenceId(Attribute attr){
+		return attr.getEntity().getTableName() +"_"+ attr.getDbName()+"_seq";
+	}
 	/**
 	 * シーケンスの型を取得。バックアップテーブル用。
 	 * @return
