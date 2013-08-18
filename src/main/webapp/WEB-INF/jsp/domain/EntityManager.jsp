@@ -64,27 +64,29 @@ public class <%= className %>Manager {
 
 	/**
 	 * <%= entity.getTitle() %>登録処理。
-	 * @return entity.
+	 * @return 登録日時、更新日時をセットしたEntity。.
 	 */
 	public <%= className %> insert(<%= className %> entity){
-		baseDao.insert(entity);
+<%= writer.writeInsertDate() 
+%>		baseDao.insert(entity);
 <% if(entity.isCached()){ %>		cacheManager.put(entity.getPk(), Optional.of(entity));<% } %>
 		return entity;
 	}
 
 	/**
 	 * <%= entity.getTitle() %>更新処理。
-	 * @return E 更新時間をセットしたEntityそのものを返す。
+	 * @return 更新日時をセットしたEntity。
 	 */
 	public <%= className %> update(<%= className %> entity){
-		baseDao.update(entity);
+<%= writer.writeInsertDate() 
+%>		baseDao.update(entity);
 <% if(entity.isCached()){ %>		cacheManager.put(entity.getPk(), Optional.of(entity));<% } %>
 		return entity;
 	}
 
 	/**
 	 * <%= entity.getTitle() %>削除
-	 * @param E
+	 * @param PK
 	 * @return
 	 * @throws SQLException
 	 */
@@ -97,9 +99,8 @@ public class <%= className %>Manager {
 
 	/**
 	 * 一覧処理。
-	 * @param pageInfo
-	 * @param cond
-	 * @return
+	 * @param cond 検索条件
+	 * @return 検索結果一覧
 	 * @throws SQLException
 	 */
 	public List&lt;<%= className %>&gt; list(Condition cond) {
@@ -108,9 +109,9 @@ public class <%= className %>Manager {
 
 	/**
 	 * ページング一覧処理。
-	 * @param pageInfo
-	 * @param cond
-	 * @return
+	 * @param cond 検索条件
+	 * @param pageInfo ページ情報
+	 * @return 検索結果の指定ページ部分。
 	 * @throws SQLException
 	 */
 	public Pager&lt;<%= className %>&gt; pager(Condition cond, PageInfo pageInfo) {
@@ -130,18 +131,8 @@ public class <%= className %>Manager {
 		}
 
 		@Override
-		public <%= className %>.PK decode(String key) {
-			return JSON.decode(key,<%= className %>.PK.class);
-		}
-
-		@Override
 		public Optional&lt;<%= className %>&gt; load(<%= className %>.PK in) {
 			return Optional.fromNullable(baseDao.load(<%= className %>.class, in));
-		}
-
-		@Override
-		public ValidTerm getValidTerm(<%= className %>.PK in) {
-			return new ValidTerm(1, TimeUnit.DAYS);
 		}
 	}
 <%	} %>}

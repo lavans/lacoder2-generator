@@ -26,6 +26,12 @@ public class EntityManagerWriter {
 	public String writeImports(){
 		StringBuffer buf = new StringBuffer();
 		buf.append("import java.util.List;\n");
+		if(entity.hasDate()){
+			buf.append("import java.util.Date;\n");
+		}
+		if(entity.hasInsertDatetime() || entity.hasUpdateDatetime()){
+			buf.append("import lombok.val;\n");
+		}
 		buf.append("\n");
 		buf.append("import com.lavans.lacoder2.di.BeanManager;\n");
 		buf.append("import com.lavans.lacoder2.lang.LogUtils;\n");
@@ -39,7 +45,7 @@ public class EntityManagerWriter {
 			buf.append("import com.google.common.base.Optional;\n");
 			buf.append("import net.arnx.jsonic.JSON;\n");
 			buf.append("\n");
-			
+
 		}
 		buf.append("import com.lavans.lacoder2.util.PageInfo;\n");
 		buf.append("import com.lavans.lacoder2.util.Pager;\n");
@@ -65,7 +71,7 @@ public class EntityManagerWriter {
 			buf.append("	/** キャッシュマネージャー。 */\n");
 			buf.append("	private CacheManager&lt;"+ entity.getClassName() +".PK, Optional&lt;"+ entity.getClassName() +"&gt;&gt; cacheManager = BeanManager.getBean(CacheManager.class.getName());\n");
 		}
-		
+
 		return buf.toString();
 	}
 
@@ -78,5 +84,25 @@ public class EntityManagerWriter {
 		return buf.toString();
 	}
 
+	public String writeInsertDate() {
+		if(!entity.hasInsertDatetime()){
+			return "";
+		}
+		StringBuffer buf = new StringBuffer();
+		buf.append("		val now() = new Date();\n");
+		buf.append("		entity.setInsertDatetime(now);\n");
+		buf.append("		entity.setUpdateDatetime(now);\n");
+		return buf.toString();
+	}
+
+	public String writeUpdateDate() {
+		if(!entity.hasUpdateDatetime()){
+			return "";
+		}
+		StringBuffer buf = new StringBuffer();
+		buf.append("		val now() = new Date();\n");
+		buf.append("		entity.setUpdateDatetime(now);\n");
+		return buf.toString();
+	}
 
 }
