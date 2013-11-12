@@ -17,7 +17,7 @@ import com.lavans.lacoder2.lang.StringUtils;
 
 public class JspTemplateEngine {
 	private static Logger logger = LogUtils.getLogger();
-	
+
 	private Entity entity;
 	private Role role;
 	//private String varName;
@@ -153,13 +153,5 @@ public class JspTemplateEngine {
 //		entity.geta
 //		buf.indexOf()
 		return result;
-	}
-
-	/**
-	 * PKをentityからgetするメソッドをカンマ区切りで列挙する。
-	 * @return
-	 */
-	public String writePrimaryKeyGetter(){
-		return new DaoWriter(entity).writePrimaryKeyGetter();
 	}
 }
