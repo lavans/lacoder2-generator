@@ -58,7 +58,7 @@ import <%= pkg.getName() %>.<%= pkg.getProject() %>.common.UserManager;
  * @author ${user}
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper=true)
 public class <%= className %> extends <%= className %>Base{
 	/** serialID */
 	private static final long serialVersionUID = 1L;
