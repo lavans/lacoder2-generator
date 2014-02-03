@@ -3,6 +3,7 @@ package com.lavans.lacoder2.generator.main;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import lombok.Getter;
@@ -121,6 +122,7 @@ public class Target {
 				list.add(file.getName());
 			}
 		}
+		Collections.sort(list);
 		return list;
 	}
 }

@@ -6,7 +6,7 @@
 
 	<database>
 		<type>postgres</type>
-		<ip>192.168.1.11</ip>
+		<ip>ds</ip>
 		<name>ds</name>
 		<user>ds</user>
 		<pass>pass2ds</pass>
