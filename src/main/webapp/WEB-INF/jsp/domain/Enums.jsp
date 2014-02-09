@@ -30,16 +30,10 @@
 /* $Id: Enums.jsp 604 2012-12-11 10:40:02Z dobashi $
  *
  * Created by hsbi-const-generator on <%= sdf.format(new Date()) %>.
- * © SBI SECURITIES Co., Ltd. ALL Rights Reserved.
+ * © Lavans, Inc. ALL Rights Reserved.
  */
 package <%= pkg.getName() %>;
 
-<%--import java.io.Serializable;
- --%>import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-<%--import com.lavans.lacoder2.util.IEnum; --%>
 /**
  * <%= enumClass.getTitle() %>Enum。
  * @author
@@ -75,7 +69,6 @@ public enum <%= className %> {
 		}
 		return defaultStr;
 	}
-
 <%
 	for(int i=0; i<fieldList.size(); i++){
 		String fieldName = (String)enumClass.getFieldList().get(i);
