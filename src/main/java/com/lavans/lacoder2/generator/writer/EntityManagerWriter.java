@@ -89,7 +89,7 @@ public class EntityManagerWriter {
 			return "";
 		}
 		StringBuffer buf = new StringBuffer();
-		buf.append("		val now() = new Date();\n");
+		buf.append("		val now = new Date();\n");
 		buf.append("		entity.setInsertDatetime(now);\n");
 		buf.append("		entity.setUpdateDatetime(now);\n");
 		return buf.toString();
@@ -100,7 +100,7 @@ public class EntityManagerWriter {
 			return "";
 		}
 		StringBuffer buf = new StringBuffer();
-		buf.append("		val now() = new Date();\n");
+		buf.append("		val now = new Date();\n");
 		buf.append("		entity.setUpdateDatetime(now);\n");
 		return buf.toString();
 	}

@@ -49,15 +49,15 @@ public class <%= className %>Manager {
 	/**
 	 * インスタンスを返します。
 	 * <% if(entity.isCached()){ %>キャッシュに無い場合はDBからloadされキャッシュされます。 <% } %>
-	 * 
+	 *
 	 * @param pk PrimaryKey
 	 * @return entity instance.
 	 */
 	public <%= className %> get(<%= className %>.PK pk){
 		if(pk==null) return null;
-<% if(entity.isCached()){ 
+<% if(entity.isCached()){
 %>		return cacheManager.get(pk).orNull();
-<% }else{ 
+<% }else{
 %>		return baseDao.load(<%= className %>.class, pk);
 <% }
 %>	}
@@ -67,7 +67,7 @@ public class <%= className %>Manager {
 	 * @return 登録日時、更新日時をセットしたEntity。.
 	 */
 	public <%= className %> insert(<%= className %> entity){
-<%= writer.writeInsertDate() 
+<%= writer.writeInsertDate()
 %>		baseDao.insert(entity);
 <% if(entity.isCached()){ %>		cacheManager.put(entity.getPk(), Optional.of(entity));<% } %>
 		return entity;
@@ -78,7 +78,7 @@ public class <%= className %>Manager {
 	 * @return 更新日時をセットしたEntity。
 	 */
 	public <%= className %> update(<%= className %> entity){
-<%= writer.writeInsertDate() 
+<%= writer.writeUpdateDate()
 %>		baseDao.update(entity);
 <% if(entity.isCached()){ %>		cacheManager.put(entity.getPk(), Optional.of(entity));<% } %>
 		return entity;
