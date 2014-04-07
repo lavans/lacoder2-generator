@@ -43,9 +43,7 @@ public enum <%= className %> {
 
 	/** Enum ID */
 	public static final String _ID	= "<%= enumClass.getName() %>";
-
 <%= writer.writeMaps() %>
-
 	/**
 	 * 初期化
 	 * <%-- 最終的にはタイトルはResourceBundleから取得？
@@ -129,10 +127,9 @@ public enum <%= className %> {
 	public static <%= className %>[] values<%= StringUtils.capitalize(fieldName) %>(){
 		return (<%= className %>[])<%= fieldName %>List.toArray();
 	}
-<%	}	%>
-	private String title = null;
+<%	}
+%>	private String title = null;
 <%= writer.writeInstanceVars() %>
-
 	/**
 	 * コンストラクタ。
 	 */
