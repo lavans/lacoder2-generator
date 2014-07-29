@@ -2,5 +2,13 @@
 <!DOCTYPE lacoder>
 <!-- $Id: target.xml.sample 248 2011-02-01 14:10:31Z dobashi $ -->
 <lacoder>
-	<target>invalley</target>
+  <target>project</target>
+  <database>
+    <type>postgres|oracle</type>
+    <ip>servername|ipaddress</ip>
+    <name>dbname</name>
+    <user>user</user>
+    <pass>pass</pass>
+    <statistics>true</statistics>
+  </database>
 </lacoder>
