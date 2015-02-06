@@ -5,7 +5,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp/WEB-INF/jsp"/>
-        <dependent-module archiveName="lacoder2-0.0.1-SNAPSHOT1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/lacoder2/lacoder2">
+        <dependent-module archiveName="lacoder2-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/lacoder2/lacoder2">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="lacoder2-generator"/>

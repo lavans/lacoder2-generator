@@ -24,8 +24,8 @@ public class TopAction extends ActionSupport {
 	}
 
 	private List<String> getTargetList(){
-		Config configTarget = Config.getInstance("target.xml", true);
-		NodeList nodeList = configTarget.getNodeList("/lacoder2-generator/target");
+		Config configTarget = Config.getInstance("lacoder2.xml", true);
+		NodeList nodeList = configTarget.getNodeList("target");
 		List<String> targetList = new ArrayList<String>();
 		for(int i=0; i<nodeList.getLength(); i++){
 			Element node = (Element)nodeList.item(i);

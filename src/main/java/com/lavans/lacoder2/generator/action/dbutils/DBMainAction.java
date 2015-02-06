@@ -2,24 +2,25 @@ package com.lavans.lacoder2.generator.action.dbutils;
 
 import java.util.List;
 
+import lombok.val;
+
 import org.apache.commons.lang3.time.StopWatch;
 import org.slf4j.Logger;
 
 import com.lavans.lacoder2.controller.ActionSupport;
 import com.lavans.lacoder2.lang.LogUtils;
+import com.lavans.lacoder2.sql.dbutils.model.ConnectInfo;
 import com.lavans.lacoder2.sql.dbutils.model.Database;
-import com.lavans.lacoder2.sql.dbutils.model.DbmsConnectInfo;
 
 public class DBMainAction extends ActionSupport{
 	private static final Logger logger = LogUtils.getLogger();
 
-	private static Database database = Database.connect(createConnectInfo());
+	private static final Database database;
 
-
-	/** todo */
-	private static DbmsConnectInfo createConnectInfo() {
-		DbmsConnectInfo connectInfo = DbmsConnectInfo.load("target.xml", "database");
-		return connectInfo;
+	static{
+    val c = new ConnectInfo("lacoder2.xml", "default");
+    val d = new Database(c);
+    database = d;
 	}
 
 	public String execute(){

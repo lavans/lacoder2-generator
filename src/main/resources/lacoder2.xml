@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE luz>
 <root>
-	<web-app>
-		<encoding>UTF-8</encoding>
-		<extension>html,json</extension>
-		<action-path>com.lavans.lacoder2.generator.action</action-path>
-		<jsp-path>/WEB-INF/jsp/</jsp-path>
-	</web-app>
+  <web-app>
+    <encoding>UTF-8</encoding>
+    <extension>html,json</extension>
+    <action-path>com.lavans.lacoder2.generator.action</action-path>
+    <jsp-path>/WEB-INF/jsp/</jsp-path>
+  </web-app>
+
+  <default>
+    <type>postgres</type>
+    <host>ds</host>
+    <name>ds</name>
+    <user>ds</user>
+    <pass>pass2ds</pass>
+    <spare-connections>1</spare-connections>
+    <max-connections>50</max-connections>
+    <is-stats>true</is-stats>
+    <max-life>1m</max-life>
+  </default>
+  <target name="ds-service" bl="ds-bl" />
 </root>
