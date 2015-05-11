@@ -36,14 +36,14 @@ public class MainAction extends Action {
 			if(targetName.equals("null")){
 				target = null;
 			}else{
-				target = Target.select(targetName, getServlet().getServletContext().getRealPath("./"));
+				target = Target.select(targetName, getServlet().getServletContext().getRealPath(""));
 			}
 		}else{
 			target = Target.getSelectedTarget();
 		}
 		// target未指定なら選択画面へ
 		if(target==null){
-			Config configTarget = Config.getInstance("target.xml", true);
+			Config configTarget = Config.getInstance("lacoder2.xml", true);
 			try {
 				List<String> targetList = configTarget.getNodeValueList("target");
 				request.setAttribute("targetList", targetList);

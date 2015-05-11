@@ -38,7 +38,7 @@ public class Target {
 		//String pathes[] = realPath.split("\\\\");
 		logger.debug(StringUtils.join(pathes, " --- "));
 
-		instance.path = StringUtils.join(Arrays.copyOf(pathes, pathes.length-7),"/")+"/"+targetName;
+		instance.path = StringUtils.join(Arrays.copyOf(pathes, pathes.length-6),"/")+"/"+targetName;
 		return instance;
 	}
 
