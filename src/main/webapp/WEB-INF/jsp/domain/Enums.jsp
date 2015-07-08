@@ -18,7 +18,7 @@
 
 	List<String> fieldList = enumClass.getFieldList();
 	List<String> booleanList = enumClass.getBooleanList();
-	List<String> intList = enumClass.getBooleanList();%>
+	List<String> intList = enumClass.getIntList();%>
 <html lang="ja">
 <head>
 <title>ソース</title>
@@ -27,17 +27,27 @@
 </head>
 <body text="#000000" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10">
 <pre>
-/* $Id: Enums.jsp 604 2012-12-11 10:40:02Z dobashi $
+/* $Id:  $
  *
  * Created by hsbi-const-generator on <%= sdf.format(new Date()) %>.
  * © Lavans, Inc. ALL Rights Reserved.
  */
 package <%= pkg.getName() %>;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * <%= enumClass.getTitle() %>Enum。
  * @author
  */
+@Getter
+@AllArgsConstructor
 public enum <%= className %> {
 <%= writer.writeMembers() %>
 
@@ -77,7 +87,7 @@ public enum <%= className %> {
 	 * @return
 	 */
 	public static <%= className %> valueOfInt(int id){
-		return (<%= className %>)<%= fieldName %>Map.get(new Integer(id));
+		return (<%= className %>)<%= fieldName %>Map.get(id);
 	}
 <%		}else{
 %>
