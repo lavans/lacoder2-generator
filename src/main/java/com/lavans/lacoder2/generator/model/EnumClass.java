@@ -12,7 +12,7 @@ import com.lavans.lacoder2.lang.StringUtils;
 
 /**
  * @author dobashi
- * 
+ *
  */
 public class EnumClass {
 	private String name = null;
@@ -111,7 +111,7 @@ public class EnumClass {
 
 	/**
 	 * fieldListをcsv形式で追加
-	 * 
+	 *
 	 * @param listStr
 	 */
 	public void setFieldList(String listStr) {
@@ -132,10 +132,10 @@ public class EnumClass {
 	public void setBooleanList(String listStr) {
 		Collections.addAll(booleanList,  StringUtils.splitTrim(listStr, ","));
 	}
-	
+
 	/**
 	 * Return whether the field is boolean.
-	 *  
+	 *
 	 * @param fieldName
 	 * @return
 	 */
@@ -145,7 +145,7 @@ public class EnumClass {
 
 	/**
 	 * Get field list which has int value.
-	 * 
+	 *
 	 * @return
 	 */
 	public List<String> getIntList() {
@@ -154,23 +154,23 @@ public class EnumClass {
 
 	/**
 	 * Set field list which has int value.
-	 * 
+	 *
 	 * @param listStr
 	 */
 	public void setIntList(String listStr) {
 		Collections.addAll(intList,  StringUtils.splitTrim(listStr, ","));
 	}
-	
+
 	/**
 	 * Return whether the field is int.
-	 *  
+	 *
 	 * @param fieldName
 	 * @return
 	 */
 	public boolean isInt(String fieldName){
-		return intList.contains(fieldName);
+		return intList.contains(fieldName) || fieldName.equals("int");
 	}
-	
+
 
 	public String getComment() {
 		return comment;

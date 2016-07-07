@@ -10,7 +10,7 @@
 
   <default>
     <type>postgres</type>
-    <host>ds</host>
+    <host>localhost</host>
     <name>ds</name>
     <user>ds</user>
     <pass>pass2ds</pass>

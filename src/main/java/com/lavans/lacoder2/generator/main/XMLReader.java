@@ -341,17 +341,17 @@ public class XMLReader {
 		if (enumEle.getAttribute("fields") != "") {
 			enumClass.setFieldList(enumEle.getAttribute("fields"));
 		}
-		if (enumEle.getAttribute("values") != "") {
-			enumClass.setFieldList(enumEle.getAttribute("values"));
-		}
+//		if (enumEle.getAttribute("values") != "") {
+//			enumClass.setFieldList(enumEle.getAttribute("values"));
+//		}
 		// booleanListのセット
-		if (enumEle.getAttribute("boolean-fields") != "") {
-			enumClass.setBooleanList(enumEle.getAttribute("boolean-fields"));
-		}
+//		if (enumEle.getAttribute("boolean-fields") != "") {
+//			enumClass.setBooleanList(enumEle.getAttribute("boolean-fields"));
+//		}
 		// intListのセット
-		if (enumEle.getAttribute("int-fields") != "") {
-			enumClass.setIntList(enumEle.getAttribute("int-fields"));
-		}
+//		if (enumEle.getAttribute("int-fields") != "") {
+//			enumClass.setIntList(enumEle.getAttribute("int-fields"));
+//		}
 
 		// フィールド取得開始 -------------------------------
 		NodeList nodeList = enumEle.getChildNodes();
